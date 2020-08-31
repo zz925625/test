@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../../vue.js"></script>
+  <style>
+    ul,
+    li {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <input type="text" v-model='ttext' @key-up.enter='handleclick()'><button @click='handleclick()'>添加</button>
+    <br>
+    <ul>
+      <p>还未完成</p>
+      <li v-for='i in todolist' v-if='toactive'>
+        <input type="checkbox" name="" id="" :value="i" v-model='togroup'>{{i.name}}
+      </li>
+    </ul>
+    <ul>
+      <p>已完成</p>
+      <li v-for='i in togroup'>
+        <input type="checkbox" v-model='donegroup' :value='i'>{{i.name}}
+      </li>
+    </ul>
+    <!-- {{donegroup}} -->
+  </div>
+  <script>
+
+
+
+    let vm = new Vue({
+      el: '#box',
+      data: {
+        ttext: '',
+        todolist: [],
+        togroup: [],
+        donegroup: [],
+        toactive: true
+      },
+      computeds: {
+
+      },
+      methods: {
+        handleclick() {
+          if (this.ttext !== '') {
+            this.todolist.push({ name: this.ttext, id: new Date().getTime() })
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
